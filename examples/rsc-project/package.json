@@ -16,10 +16,10 @@
     "@ice/runtime": "workspace:*",
     "antd-mobile": "^5.12.6",
     "compression": "^1.7.4",
-    "react": "^0.0.0-experimental-1cea38448-20230530",
-    "react-dom": "^0.0.0-experimental-1cea38448-20230530",
+    "react": "^18.3.0-canary-dd480ef92-20230822",
+    "react-dom": "^18.3.0-canary-dd480ef92-20230822",
     "react-router-dom": "6.11.2",
-    "react-server-dom-webpack": "18.3.0-canary-1cea38448-20230530"
+    "react-server-dom-webpack": "18.3.0-canary-dd480ef92-20230822"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

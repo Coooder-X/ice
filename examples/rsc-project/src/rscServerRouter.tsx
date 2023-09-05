@@ -9,6 +9,7 @@
 // import React from 'react';
 // import { AppErrorBoundary } from '@ice/runtime';
 import TestClient from './components/testClient';
+import Bar from './components/bar';
 
 // async function generateRoutesDefinition(nestRouteManifest, /* : NestedRouteManifest[] */ renderMode) {
 //   const routeDefinitionObj: any[] = [];
@@ -71,11 +72,14 @@ export default function RscServerRouter() {
   // console.log('serverRouter rscRouter', routes);
   // // Server router only be called once.
   // const router = createStaticRouter(createServerRoutes(routes), routerContext);
+  const GLOBAL = 'global';
 
   return (
     <>
+      <div>Server component: rscServerRouter—— {GLOBAL}</div>
       <TestClient name={'RCC props'} />
-      <div>Server component: rscServerRouter</div>
+      <Bar num={3} />
+      <div>{add(3, 5)}</div>
     </>
     // <>
     //   {/* <StaticRouterProvider
@@ -86,6 +90,10 @@ export default function RscServerRouter() {
     //   {/* </App> */}
     // </>
   );
+}
+
+export function add(a, b) {
+  return a + b;
 }
 
 // export default RscServerRouter;

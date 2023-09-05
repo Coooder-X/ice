@@ -58,6 +58,7 @@ import usePageLifecycle from './usePageLifecycle.js';
 import { withSuspense, useSuspenseData } from './Suspense.js';
 import { createRouteLoader, WrapRouteComponent, RouteErrorComponent, Await } from './routes.js';
 import { createServerRoutes } from './ServerRouter.js';
+import { RSCRouter } from './rsc-router.js';
 
 function useAppContext() {
   console.warn('import { useAppContext } from \'@ice/runtime\'; is deprecated, please use import { useAppContext } from \'ice\'; instead.');
@@ -88,6 +89,7 @@ export {
   getAppConfig,
   defineAppConfig,
   Runtime,
+  RSCRouter,
   runClientApp,
   AppContextProvider,
   /**

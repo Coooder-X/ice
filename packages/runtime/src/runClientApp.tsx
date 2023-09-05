@@ -196,11 +196,6 @@ async function render({ history, runtime, needHydrate, useRsc }: RenderOptions) 
     root,
     useRsc
     ? <RSCRouter />
-    // <AppContextProvider value={appContext}>
-    //   <AppRuntimeProvider>
-    //     <RSCRouter />
-    //   </AppRuntimeProvider>
-    // </AppContextProvider>
     : <AppContextProvider value={appContext}>
       <AppRuntimeProvider>
         <AppRouter

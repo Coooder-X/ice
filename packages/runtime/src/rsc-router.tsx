@@ -8,6 +8,7 @@ import React, {
   useEffect,
   ReactElement,
   Suspense,
+  use,
 } from 'react';
 import pkg from 'react-server-dom-webpack/client';
 import { ClientAppRouterProps } from './types.js';
@@ -27,12 +28,13 @@ export function RSCRouter(): React.ReactElement {
   const locationKey = JSON.stringify(location);
   let content = cache.get(locationKey);
   if (!content) {
+    console.log('use', use);
     console.log('createFromFetch');
     content = createFromFetch(
       // fetch('/app?location=' + encodeURIComponent(locationKey))
       fetch('/rsc'),
     );
-    // cache.set(locationKey, content);
+    cache.set(locationKey, content);
   }
 
   function refresh(response) {
@@ -58,23 +60,25 @@ export function RSCRouter(): React.ReactElement {
     });
   }
 
-  const [finalContent, setFinalContent] = useState(null);
-  useEffect(() => {
-    content.then((res: any) => {
-      console.log('content res', res);
-      setFinalContent(res);
-    }, (e): any => {
-      console.error(e);
-    });
-  }, []);
+  // const [finalContent, setFinalContent] = useState(null);
+  // useEffect(() => {
+  //   content.then((res: any) => {
+  //     console.log('content res', res);
+  //     setFinalContent(res);
+  //   }, (e): any => {
+  //     console.error(e);
+  //   });
+  // }, []);
 
   return (
     <AppErrorBoundary>
       <RouterContext.Provider value={{ location, navigate, refresh }}>
         <div>123</div>
         <Suspense fallback={<div>loading...</div>}>
-          {finalContent}
-          {/* {use(content)} */}
+          {/* {finalContent} */}
+          {console.log('use content', use(content))}
+          <span>345</span>
+          {use(content)}
         </Suspense>
       </RouterContext.Provider>
     </AppErrorBoundary>
