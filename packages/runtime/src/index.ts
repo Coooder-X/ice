@@ -45,7 +45,6 @@ import type {
   DataType,
   MainType,
 } from './Document.js';
-import { createClientModuleProxy, registerServerReference } from './reactFlightWebpackReference.js';
 import dataLoader, { defineDataLoader, defineServerDataLoader, defineStaticDataLoader, callDataLoader } from './dataLoader.js';
 import getRequestContext from './requestContext.js';
 import AppErrorBoundary from './AppErrorBoundary.js';
@@ -59,6 +58,7 @@ import { withSuspense, useSuspenseData } from './Suspense.js';
 import { createRouteLoader, WrapRouteComponent, RouteErrorComponent, Await } from './routes.js';
 import { createServerRoutes } from './ServerRouter.js';
 import { RSCRouter } from './rsc-router.js';
+import { ServerAppContextProvider, useServerAppContext } from './AppServerContext.js';
 
 function useAppContext() {
   console.warn('import { useAppContext } from \'@ice/runtime\'; is deprecated, please use import { useAppContext } from \'ice\'; instead.');
@@ -92,11 +92,13 @@ export {
   RSCRouter,
   runClientApp,
   AppContextProvider,
+  ServerAppContextProvider,
   /**
    * @deprecated
    * Please use import { useAppContext } from \'ice\'; instead.
    */
   useAppContext,
+  useServerAppContext,
   usePublicAppContext,
   useAppData,
   useData,
@@ -114,8 +116,6 @@ export {
   usePageAssets,
   path,
   App,
-  createClientModuleProxy,
-  registerServerReference,
   createServerRoutes,
   // API for data-loader.
   dataLoader,

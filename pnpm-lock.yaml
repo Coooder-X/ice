@@ -1525,9 +1525,6 @@ importers:
       acorn-loose:
         specifier: ^8.3.0
         version: 8.3.0
-      acorn-walk:
-        specifier: ^8.2.0
-        version: 8.2.0
       address:
         specifier: ^1.1.2
         version: 1.2.2

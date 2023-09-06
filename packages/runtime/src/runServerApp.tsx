@@ -34,6 +34,7 @@ import getCurrentRoutePath from './utils/getCurrentRoutePath.js';
 import ServerRouter from './ServerRouter.js';
 import { renderHTMLToJS } from './renderHTMLToJS.js';
 import addLeadingSlash from './utils/addLeadingSlash.js';
+import { ServerAppContextProvider } from './AppServerContext.js';
 const { readFileSync } = fsPkg;
 
 interface RenderOptions {
@@ -503,11 +504,11 @@ function renderDocument(options: RenderDocumentOptions): Response {
   matches.forEach(async (match) => {
     const { id } = match.route;
     const pageConfig = routesConfig[id];
-    if (!pageConfig['$$id']) { //  rsc文件编译转换后，变成proxy对象而不是函数，应该也不需要执行这里的逻辑，暂时特判解决
+    // if (!pageConfig['$$id']) { //  rsc文件编译转换后，变成proxy对象而不是函数，应该也不需要执行这里的逻辑，暂时特判解决
       loaderData[id] = {
         pageConfig: pageConfig ? pageConfig({}) : {},
       };
-    }
+    // }
   });
 
   const appContext: AppContext = {
@@ -603,8 +604,10 @@ export async function renderRsc( // renderToRscFlow
     return (
       <div>
         {/* <RscServerRouter routes={routeManifest} routerContext={routerContext} renderMode={renderMode}></RscServerRouter> */}
-        <RscServerRouter />
-        <div>runServerApp</div>
+        <ServerAppContextProvider value={{ name: 'lzx', age: 24 }}>
+          <RscServerRouter />
+          <div>runServerApp</div>
+        </ServerAppContextProvider>
       </div>
     );
   };

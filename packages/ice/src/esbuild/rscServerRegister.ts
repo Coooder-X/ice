@@ -80,13 +80,16 @@ const rscServerRegister = (): Plugin => {
               const { declaration } = node;
               // Handling the case where the export is a function.
               if (declaration.type === 'FunctionDeclaration') {
-                source += `var ${declaration.id.name} = ${recast.print(declaration).code};\n`;
+                const functionName = declaration.id.name;
+                source += `${recast.print(declaration).code};\n`;
                 if (node.type === 'ExportNamedDeclaration') {
-                  source += `module.exports.${declaration.id.name} = ${declaration.id.name};\n`;
+                  source += `\
+                    registerServerReference(${functionName}, '${moduleId}', '${functionName}');\n\
+                    module.exports.${functionName} = ${functionName};\n`;
                 } else {
                   source += `\
-                    const comp = registerServerReference(${declaration.id.name}, '${moduleId}', null);\n\
-                    module.exports = comp;\n`;
+                    registerServerReference(${functionName}, '${moduleId}', null);\n\
+                    module.exports = ${functionName};\n`;
                 }
               }
             }
